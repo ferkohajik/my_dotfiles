@@ -1,0 +1,31 @@
+!-----------------------------------------------------------------------
+! .Xresources {
+! vim: set foldmarker={,} foldlevel=0 foldmethod=marker :
+! vim:set ft=xdefaults
+!
+! Last Change: 2019-07-27 17:45:01 CEST
+! }
+!-----------------------------------------------------------------------
+
+!! Theme:
+  #include "/home/ferko/.xres/themes/gruvbox-dark"
+!!#include "/home/ferko/.xres/urxvt"
+  #include "/home/ferko/.xres/xterm"
+
+!-----------------------------------------------------------------------
+! ---- xpdf settings ---- !
+!-----------------------------------------------------------------------
+  xpdf*enableFreetype:yes
+  xpdf*antialias:	    yes
+  xpdf*foreground:		black
+  xpdf*background:		white
+  xpdf*urlCommand:		/usr/bin/elinks %s
+  xpdf*viKeys:			  on
+
+!-----------------------------------------------------------------------
+! ---- Calendar settings ---- !
+!-----------------------------------------------------------------------
+  Xcalendar*firstDay:	    1
+  Xcalendar*markHoliday:	0
+
+!! EOF
