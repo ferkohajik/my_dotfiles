@@ -1,0 +1,197 @@
+" vimwiki settings """"""""""""""""""""""""""""""""""""""""""{
+" vim: set foldmarker={,} foldlevel=1 foldmethod=marker :
+"            _____
+" ___   ____(_)______ ___
+" __ | / /_  /__  __ `__ \
+" __ |/ /_  / _  / / / / /
+" _____/ /_/  /_/ /_/ /_/
+"
+" Maintainer: ferko
+" Version: 0.2
+" Last Change: 2019-07-27 20:29:18 CEST
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
+" VimWiki & Markdown {
+  au BufNewFile,BufFilePre,BufRead  *.md    set filetype=markdown textwidth=0 wrapmargin=0
+  au BufNewFile,BufFilePre,BufRead  *.txt   set filetype=markdown textwidth=0 wrapmargin=0
+  au BufNewFile,BufFilePre,BufRead  *.wiki  set filetype=vimwiki textwidth=0 wrapmargin=0
+
+  let g:vimwiki_ext2syntax = {'.md': 'markdown', '.txt': 'markdown', '.wiki': 'default', '.csv': 'markdown'}
+"}
+
+" Rozne ------------------------------------------------------{
+  let g:vimwiki_toc_header = 'Obsah'
+  let g:vimwiki_dir_link = 'index'    " automatically resolve folder links as folder/index.wiki
+  let g:vimwiki_hl_headers = 1        " highlight headers with different colors
+  let g:vimwiki_hl_cb_checked = 1     " highlight completed tasks
+"}
+
+" VimWiki & HTML header numbering ----------------------------{
+  let g:vimwiki_html_header_numbering = 1
+  let g:vimwiki_html_header_numbering_sym = '.'
+"}
+
+" Enable/disable VimWiki's folding (outline) functionality. --{
+"   ''            Disable folding.
+"   'expr'        Folding based on expression (folds sections and code blocks).
+"   'syntax'      Folding based on syntax (folds sections; slower than 'expr').
+"   'list'        Folding based on expression (folds list subitems; much slower).
+" let g:vimwiki_folding='list'
+  let g:vimwiki_folding=''
+" let g:vimwiki_hl_cb_checked = 1
+"}
+
+" defaults settings of wikis's -------------------------------{
+  let g:vimwiki_path = '~/wiki'
+  let g:vimwiki_path_html = '~/wiki_html'
+
+" let g:vimwiki_syntax = 'default'
+" let g:vimwiki_ext = '.wiki'
+  let g:vimwiki_syntax = 'markdown'
+" let g:vimwiki_ext = '.md'
+  let g:vimwiki_ext = '.txt'
+
+  let g:vimwiki_diary_index = 'index'
+  let g:vimwiki_index = 'index'
+  let g:vimwiki_maxhi = 1
+  let g:vimwiki_auto_export = 0
+
+  let g:vimwiki_template_path = '~/wiki/templates/'
+  let g:vimwiki_template_default = 'default'
+  let g:vimwiki_template_ext = '.html'
+  let g:vimwiki_custom_wiki2html = 'wiki2html.sh'
+" let g:vimwiki_custom_wiki2html = 'vimwiki_markdown'
+" let g:vimwiki_default_css_name = '~/wiki/templates/css/style.css'
+  let g:vimwiki_default_css_name = '~/wiki/templates/css/style.css'
+"}
+
+" wiki's -----------------------------------------------------{
+  let wiki_0 = {}
+  let wiki_0.path = '~/wiki/'
+  let wiki_0.path_html = '~/wiki_html/'
+
+  let wiki_1 = {}
+  let wiki_1.path = '~/wiki/howto/'
+  let wiki_1.path_html = '~/wiki_html/howto/'
+
+  let wiki_2 = {}
+  let wiki_2.path = '~/wiki/mvs_2017/'
+  let wiki_2.path_html = '~/wiki_html/mvs_2017/'
+
+  let wiki_3 = {}
+  let wiki_3.path = '~/wiki/szv/'
+  let wiki_3.path_html = '~/wiki_html/szv/'
+  let wiki_3.template_ext = '.tpl'
+
+  let wiki_4 = {}
+  let wiki_4.path = '~/wiki/vcely/'
+  let wiki_4.path_html = '~/wiki_html/vcely/'
+
+  let wiki_5 = {}
+  let wiki_5.path = '~/wiki/zdravie/'
+  let wiki_5.path_html = '~/wiki_html/zdravie/'
+
+  let wiki_6 = {}
+  let wiki_6.path = '~/wiki/thermo-rec/'
+  let wiki_6.path_html = '~/wiki_html/thermo-rec/'
+  let wiki_6.auto_export = 0
+  let wiki_6.ext = '.wiki'
+  let wiki_6.syntax = 'default'
+  let wiki_6.custom_wiki2html = 'default'
+
+  let wiki_7 = {}
+  let wiki_7.path = '~/wiki/notes/'
+  let wiki_7.path_html = '~/wiki_html/notes/'
+
+  let wiki_8 = {}
+  let wiki_8.path = '~/yadisc/wiki/'
+  let wiki_8.path_html = '~/yadisc/wiki_html/'
+
+  let wiki_9 = {'path': '~/wiki/test/',
+              \ 'template_path': '~/wiki/templates/',
+              \ 'template_default': 'default',
+              \ 'syntax': 'markdown', 'ext': '.md',
+              \ 'path_html': '~/wiki_html/test/',
+              \ 'custom_wiki2html': 'vimwiki_markdown',
+              \ 'template_ext': '.tpl'}
+" let wiki_9.auto_export = 0
+" let wiki_9.syntax = 'markdown'
+" let wiki_9.ext = '.md'
+" let wiki_9.ext2syntax = 'markdown'
+" let wiki_9.custom_wiki2html = '~/bin/wiki2html.sh'
+
+" let wiki_99 = {}
+" let wiki_99.path = '~/wiki/test/'
+" let wiki_99.path_html = '~/wiki_html/test/'
+
+  let g:vimwiki_list = [wiki_0, wiki_1, wiki_2, wiki_3, wiki_4, wiki_5, wiki_6, wiki_7, wiki_8, wiki_9]
+"}
+
+" Nadpisy farebne --------------------------------------------{
+
+" :hi VimwikiHeader1 guifg=#FF0000
+" :hi VimwikiHeader2 guifg=#00FF00
+" :hi VimwikiHeader3 guifg=#0000FF
+" :hi VimwikiHeader4 guifg=#FF00FF
+" :hi VimwikiHeader5 guifg=#00FFFF
+" :hi VimwikiHeader6 guifg=#FFFF00
+
+" :hi VimwikiH1Folding guibg=#FF0000
+" :hi VimwikiH2Folding guifg=#22AA22
+" :hi VimwikiH3Folding guifg=#1177DD
+" :hi VimwikiH4Folding guifg=#BB8811
+" :hi VimwikiH5Folding guifg=#00FFFF
+" :hi VimwikiH6Folding guifg=#FFFF00
+
+"}
+
+" Diar - Calendar --------------------------------------------{
+
+  let g:vimwiki_diary_rel_path = 'journal'
+  let g:vimwiki_diary_header = 'Journal'
+  let g:vimwiki_diary_sort = 'asc'
+
+  :autocmd FileType vimwiki map <leader>d :VimwikiMakeDiaryNote
+    function! ToggleCalendar()
+      execute ":Calendar"
+      if exists("g:calendar_open")
+        if g:calendar_open == 1
+          execute "q"
+          unlet g:calendar_open
+        else
+          g:calendar_open = 1
+        end
+      else
+        let g:calendar_open = 1
+      end
+    endfunction
+  :autocmd FileType vimwiki map c :call ToggleCalendar()
+
+" Redefine it in your .vimrc to get localized months in your diary:
+" let g:vimwiki_diary_months = {
+"       \ 1: 'Январь', 2: 'Февраль', 3: 'Март',
+"       \ 4: 'Апрель', 5: 'Май', 6: 'Июнь',
+"       \ 7: 'Июль', 8: 'Август', 9: 'Сентябрь',
+"       \ 10: 'Октябрь', 11: 'Ноябрь', 12: 'Декабрь'
+"       \ }
+
+  let g:vimwiki_diary_months = {
+        \ 1: 'Január', 2: 'Február', 3: 'Marec',
+        \ 4: 'Apríl', 5: 'Máj', 6: 'Jún',
+        \ 7: 'Júl', 8: 'August', 9: 'September',
+        \ 10: 'Octóber', 11: 'November', 12: 'December'
+        \ }
+"}
+
+" Export vimwiki md to html ----------------------------------{
+" dependence on ~/bin/wiki2html.sh
+"
+"     autocmd FileType vimwiki call SetMarkdownOptions()
+"
+"       function! SetMarkdownOptions()
+"         call VimwikiSet('syntax', 'markdown')
+"         call VimwikiSet('custom_wiki2html', 'wiki2html.sh')
+"     endfunction
+"}
+
+" eof

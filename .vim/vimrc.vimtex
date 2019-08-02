@@ -1,0 +1,8 @@
+" Vimtex options go here
+let g:tex_flavor = 'latex'
+let g:vimtex_view_method = 'zathura'
+
+
+" Some vimtex mappings
+nnoremap <Leader>t :VimtexTocOpen<CR>
+nnoremap <Leader>L :VimtexLabelsOpen<CR>

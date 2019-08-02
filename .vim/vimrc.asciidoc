@@ -1,0 +1,6 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""    ashwin/set_asciidoc_compiler.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim-Asciidoc plugin sets compiler by default to asciidoc
+" Here we set it to asciidoctor
+" autocmd Filetype asciidoc compiler asciidoctor

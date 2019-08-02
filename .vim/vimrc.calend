@@ -1,0 +1,35 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CALENDAR settings {
+" vim: set foldmarker={,} foldlevel=0 foldmethod=marker :
+"            _____
+" ___   ____(_)______ ___
+" __ | / /_  /__  __ `__ \
+" __ |/ /_  / _  / / / / /
+" _____/ /_/  /_/ /_/ /_/
+"
+" Maintainer: ferko
+" Version: 0.3
+" Last Change: 2019-07-18 21:40:58 CEST
+"
+" Zdroj1: https://github.com/itchyny/calendar.vim
+" Zdroj2: https://github.com/mattn/calendar-vim
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
+" Base and required
+
+" GOOGLE CALENDAR {
+  let g:calendar_google_calendar = 1
+  let g:calendar_google_task = 1
+"}
+
+  function MyCalAction(day,month,year,week,dir)
+   " day   : day you actioned
+   " month : month you actioned
+   " year  : year you actioned
+   " week  : day of week (Pon=1 Uto=2 Str=3 Stv=4 Pia=5 Sob=6 Ne=7)
+   " dir   : direction of calendar
+   endfunction
+   let calendar_action = 'MyCalAction'
+
+" EOF

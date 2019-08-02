@@ -1,0 +1,613 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM SETTINGS {
+" vim: set foldmarker={,} foldlevel=1 foldmethod=marker :
+"            _____
+" ___   ____(_)______ ___
+" __ | / /_  /__  __ `__ \
+" __ |/ /_  / _  / / / / /
+" _____/ /_/  /_/ /_/ /_/
+"
+" Maintainer: ferko
+" Version: 0.7
+" Last Change: 2019-07-27 22:17:59 CEST
+"}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ZÁKLADNÉ NASTAVENIA {
+" Nastavenie prostredia {
+  set nocompatible            " Musí byť na prvom riadku!!!
+
+  filetype on                 " Podpora automatickej detekcie typu súboru
+  filetype plugin on          " Podpora automatického načítavania pluginov pre daný typ súboru
+  filetype indent on          " Podpora automatického načítavania odsadzovacieho skriptu
+
+  set key=                    " Disable encryption file and buffer encryption
+  set nobomb                  " Don't use BOMs (Byte Order Marks)
+  set ff=unix
+" set ffs=unix,dos,mac        " Set filetype to Unix, Windows and then Mac
+
+  set encoding=utf-8          " Základné kódovanie
+  set fileencodings=utf-8     " Kódovanie súborov
+  scriptencoding=utf-8        " Kódovanie skriptov
+
+  set printencoding=latin2    " tlač  kódovanie tlače 88592, latin2
+" set printencoding=cyrillic " tlač  kódovanie tlače 88595, cyrillic
+" set printfont=terminus:h10 " tlač  printfont = pfn
+" set printfont=DejaVuSans:h11     " tlač  printfont = pfn
+  set printfont=Courier_New:h13     " tlač  printfont = pfn
+
+  set iskeyword-=.            " '.' is an end of word designator
+  set iskeyword-=#            " '#' is an end of word designator
+  set iskeyword-=-            " '-' is an end of word designator
+
+  set hidden                  " Pamätá si históriu undo a umožní prepínanie neuložených bufferov
+  set novisualbell            " Error bells are displayed visually.
+  set noerrorbells            " Vypnutie pípnutí pri chybe
+  set grepprg=grep\ -nH\ $*   " Nastavenie príkazu pre grepovanie súborov
+" set scrolloff=5             " Nastavenie počtu riadkov viditeľných nad a pod kurzorom
+  set scrolloff=999           " Nastavenie editovaného riadku v strede obrazovky
+  nnoremap <leader>z :let &scrolloff=999-&scrolloff<CR>
+
+  set sidescrolloff=3         " Nastavenie počtu stĺpcov viditeľných pred a za kurzorom
+  set scrolljump=1            " lines to scroll when cursor leaves screen
+" }
+
+" Optimalizácia výkonu {
+  set ttyfast         " Optimalizácia pre rýchle terminálové spojenia
+" }
+
+" Vyhľadávanie {
+  set hlsearch      " Hilight searches by default
+  set incsearch     " Automatický presun na hľadaný výraz počas písania
+  set ignorecase    " Ignore case when searching
+  set smartcase     " make searches case-insensitive except when you include upper-case characters (so /foo matches FOO and fOo, but /FOO only matches FOO)
+" }
+
+" Ukladanie {
+  set history=1000                " Nastavenie histórie na 1000 príkazov
+  set autoread                    " Automatické načítanie, ak bol súbor zmenený zvonka
+  set autowrite                   " Automatický zápis pri prechode na iný buffer
+  set confirm                     " Pri ukončení editora sa spýta, či majú byť zmeny uložené
+" Quick saving
+  nmap <silent> <F2> :w<cr>
+
+  set backup                      " Automatická záloha súborov
+  set backupdir=$HOME/.vim/backup     " Automaticky zálohovať do nasledujúceho adresára
+" Fast" Create backup directory if it doesn't exist
+      if !isdirectory(expand(&backupdir))
+        call mkdir(expand(&backupdir), 'p')
+      endif
+
+  set undofile                    " Enable persistent undo
+  set undodir=$HOME/.vim/undodir      " Ukladanie zmien do uvedeého adresára
+" Create undo directory if it doesn't exist
+      if !isdirectory(expand(&undodir))
+        call mkdir(expand(&undodir), 'p')
+      endif
+
+  set directory=$HOME/.vim/tmp        " Nastavenie dočasného adresára
+" Create tmp directory if it doesn't exist
+"      if !isdirectory("$HOME/.vim/tmp")
+"        call mkdir("$HOME/.vim/tmp", 'p')
+"      endif
+" }
+
+" Nastavenie súboru viminfo {
+" set viminfo+=n~/.vim/viminfo
+  set viminfo='50,\"500,n~/.vim/viminfo
+"               |   |
+"               |   + Maximálna veľkosť registru - 500 riadkov
+"               + Ukladanie informácii o max. 50. naposledy editovaných súboroch
+" }
+
+" Automatické vloženie časovej značky {
+" Time stamp for search line to update
+  let g:update_time_time_stamp_leader = 'Last Change: '
+" Time format
+  let g:update_time_time_format = '%Y-%m-%d %H:%M:%S %Z'
+" Begin line number to search
+  let g:update_time_begin_line = 0
+" End line number to search
+  let g:update_time_end_line = 15
+" Default enable when save
+  let g:update_time_enable = 1
+" }
+
+" Kopírovanie a vkladanie {
+" set clipboard=unnamedplus
+"     nnoremap <C-y> "+y
+"     vnoremap <C-y> "+y
+"     nnoremap <C-p> "+gP
+"     vnoremap <C-p> "+gP
+  set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+" }
+
+" MYŠ {
+  set mouse=a         " Aktivovanie podpory myši vo všetkých režimoch
+  set mousehide       " Hide the mouse cursor while typing
+" }
+"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FARBY {
+" Solarized {
+  set t_Co=256
+
+  if &t_Co > 2 || has("gui_running")
+    syntax on
+  endif
+
+  if has('gui_running')
+    set background=dark
+  else
+    set background=dark
+  endif
+
+" " solarized - option name default optional
+"   let g:solarized_termcolors=16
+"   let g:solarized_degrade=1
+    let g:solarized_contrast="medium"
+"   let g:solarized_visibility="high"
+"   let g:solarized_diffmode="high"
+"   let g:solarized_hitrail=1
+
+" colorscheme solarized
+  colorscheme gruvbox
+" }
+
+" Zmena "tmaveho | svetleho" pozadia manualne <F5> | <F6> {
+
+" solarized
+" map <silent> <F5> :set background=dark<CR>:let g:solarized_degrade=1<CR>:let g:solarized_contrast="high"  <CR>:let g:solarized_visibility="high"<CR>:let g:solarized_diffmode="high"<CR>:let g:solarized_hitrail=1<CR>:colorscheme solarized<CR>
+" map <silent> <F6> :set background=light<CR>:let g:solarized_degrade=1<CR>:let g:solarized_contrast="high"<CR>:let g:solarized_visibility="high"<CR>:let g:solarized_diffmode="high"<CR>:let g:solarized_hitrail=1<CR>:colorscheme solarized<CR>
+
+" gruvbox
+  map <silent> <F5> :set background=dark<CR>:let g:solarized_degrade=1<CR>:let g:solarized_contrast="medium"<CR>:let g:solarized_visibility="high"<CR>:let g:solarized_diffmode="high"<CR>:let g:solarized_hitrail=1<CR>:colorscheme gruvbox<CR>
+  map <silent> <F6> :set background=light<CR>:let g:solarized_degrade=1<CR>:let g:solarized_contrast="medium"<CR>:let g:solarized_visibility="high"<CR>:let g:solarized_diffmode="high"<CR>:let g:solarized_hitrail=1<CR>:colorscheme gruvbox<CR>
+" }
+"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ViM OBRAZOVKA {
+" Okno {
+  set title                       " Vim bude nastavovať titulok okna
+  set cursorline                  " zvýraznenie aktuálneho riadka pod kurzorom
+
+" Display line numbers if terminal is wide enough.
+  if &co > 80
+    set number
+  endif
+" }
+
+" Ostatné {
+  set linespace=0                 " No extra spaces between rows
+" set showmatch                   " show matching brackets/parenthesis
+" set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
+  set foldenable                  " auto fold code
+" set gdefault                    " the /g flag on :s substitutions by default
+
+  if has('cmdline_info')
+"   set showcmd     " show partial commands in status line and selected characters/lines in visual mode
+    set ruler       " show the ruler all the time
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)  " A ruler on steroids
+  endif
+" }
+
+" Nastavenie menu {
+  set wildmenu          " Zobrazenie jednoduchého menu pri dopĺňaní s niekoľkými existujúcimi možnosťami
+  set wildchar=<Tab>              " Na dopĺňanie príkazov sa používa klávesa tab
+  set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
+  set wildmode=longest:full,full  " Doplnenie čo najväčšej časti príkazu
+  set wildignore=Ui_*             " Ignorovanie dopĺňania Ui_*
+
+  set completeopt=menuone,menu,longest,preview
+"                 |       |    |       |
+"                 |       |    |       + Použivať náhľadové okno
+"                 |       |    + Doplniť najdlhší spoločný text
+"                 |       + Zobraziť popup menu pre dopĺňanie
+"                 + Zobraziť menu aj keď je jediná zhoda
+" }
+
+" Stavový riadok {
+  if has('statusline')
+    set laststatus=2         " Zobrazovanie stavového riadku vždy
+
+""" set statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+    set statusline=[%n]\ %<\ %F\ \ \ [%{&ff}]\ %h%w%m%r=%-14.(%l,%c%V%)\ %P
+"   set statusline=[%n]\ %<\ %F\ \ \ [%{&ff}]\ %h%w%m%r\ \ \
+    "                |        |           |     | | | |
+    "                |        |           |     | | | + Len na čítanie
+    "                |        |           |     | | + Modifikovaný
+    "                |        |           |     | + Náhľadové okno
+    "                |        |           |     + Help okno
+    "                |        |           + Typ súboru (dos/unix..)
+    "                |        + Súbor
+    "                + Indikátor pretečenia textu stavového riadku
+
+    set statusline+=\ \ \ %(\{%{Tlist_Get_Tagname_By_Line()}\}%)
+    "                             |
+    "                             + Zobrazenie aktuálneho tagu
+
+    set statusline+=%=%-13.(%l/%L\ %c%V%)\ %P\
+    "                 | |    |  |   | |     |
+    "                 | |    |  |   | |     + Percentuálne vyjadrenie polohy v súbore
+    "                 | |    |  |   | + Virtuálne číslo stĺpca
+    "                 | |    |  |   + Číslo stĺpca
+    "                 | |    |  + Celkový počet riadkov
+    "                 | |    + Číslo riadku
+    "                 | + Minimálna šírka nasledujúceho výrazu 13 znakov
+    "                 + Prechod na zarovnanie vpravo
+  endif
+
+" Show tabline
+  set showtabline=1 "Always display the tabline, even if there is only one tab/2
+"
+" Show editing mode
+  set showmode      " display the current mode
+
+" }
+"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FORMÁTOVANIE A ZOBRAZOVANIE{
+" Nastavenie automatického formátovania pri písaní {
+  set formatoptions=croqn
+  "                 |||||
+  "                 ||||+ recognize lists
+  "                 |||+ Automatické sformátovanie pri gq
+  "                 ||+ Automatické vloženie komentára pri použití o/O
+  "                 |+ Automatické vloženie komentára na nový riadok
+  "                 + Automatické zalamovanie v komentároch
+
+  set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+
+  set copyindent      " Kopírovanie štruktúry odsadenia pri automatickom odsadení
+  set preserveindent  " Ponechanie štruktúry odsadenia pri jeho zmene
+  set shiftround      " Zaokrúhlenie odsadenia na niekoľko tab-ov
+  set expandtab       " nahradzovať tabulátor medzerami
+  set autoindent      " indent at the same level of the previous line
+" }
+
+" Nastavenie zobrazovanej šírky tabulátora {
+  set tabstop=2
+  set shiftwidth=2  " Počet vložených medzier pri zväčšení odsadenia (automaticky sa prevedú na tabulátor)
+  set softtabstop=2
+  set smartindent   " Automatické zväčšenie / zmenšenie odsadenia podľa zvyklostí jazyka
+  set smarttab
+" }
+
+" Zobrazovanie a zalamovanie riadkov {
+  set display=lastline    " zobrazenie čo najväčšej časti posledného riadku
+
+  set wrap                " zalamovanie dlhych riadkov na konci obrazovky
+  set linebreak           " zobrazenie zalomených riadkov aj bez vloženého EOL
+  set textwidth=0         " zalomenie textu po n pismenach do dalsieho riadka; 0=zakazane
+  set wrapmargin=0        " zalamovanie až na konci riadka
+
+  let &sbr = '»  '        " zobrazenie pokračovania textu na ďalšom riadku, ak riadok prekračuje šírku okna, nastavenie po zalomení riadka
+" }
+
+" Zobrazovanie netlačiteľných znakov {
+  set nolist          " don't show ALL white spaces as a character
+  set listchars=eol:$,tab:\»\ ,trail:•,extends:>,precedes:<,nbsp:. "
+
+" prepínanie zobrazovania netlačiteľných znakov
+" set list! as a toggle in .vimrc:
+  noremap <F7> :set list!<CR>
+  inoremap <F7> <C-o>:set list!<CR>
+  cnoremap <F7> <C-c>:set list!<CR>
+" }
+"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PRAVOPIS {
+" Nastavenie pre automatickú kontrolu na slovenského jazyka
+" Pre zapnutie kontroly treba spustiť :set spell
+" Predtým sa musia vygenerovať slovníky. Na generovanie sa používa štandardný myspell slovník (napr. v /usr/share/myspell). Na vygenerovanie sa používa mkspell.
+  if has('spell')
+    set nospell
+    set spelllang=sk
+    set spellfile=$HOME/.vim/spell/sk.utf-8.add
+    set spellsuggest=best,10
+  endif
+
+" Automatický skok na prvú chybu
+  set cf
+" }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOMATICKÉ DOPĹŇANIE {
+  set matchpairs+=<:>             " match, to be used with %
+"
+" Dopĺňanie po stlačení Ctrl+Space
+" imap <C-Space> <C-X><C-I>
+" imap <Nul> <C-X><C-I>
+" }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SKRATKY {
+  let mapleader = ","
+  let g:mapleader = ","
+
+" Stupid shift key fixes {
+  cmap W w
+  cmap Ww w
+  cmap ww w
+  cmap Wq wq
+  cmap WQ wq
+  cmap wQ wq
+  cmap Q q
+" }
+"  Vylepšené vkladanie úvodzoviek {
+"           inoremap '      ''
+"           inoremap "      ""
+"           inoremap ''     '
+"           inoremap ""     "
+" }
+" Using tabs {
+  map <leader>tn :tabnew <cr>
+" map <leader>tc :tabclose<cr>
+  map <leader>tm :tabmove
+  nnoremap th :tabfirst<CR>
+  nnoremap tj :tabnext<CR>
+  nnoremap tk :tabprev<CR>
+  nnoremap tl :tablast<CR>
+  nnoremap tt :tabedit<Space>
+  nnoremap tn :tabnext<Space>
+  nnoremap tm :tabm
+  nnoremap td :tabclose<CR>
+" }
+" Using buffers {
+
+"split window with another buffer
+  set switchbuf=usetab
+
+" print numbered list of buffers
+  nnoremap <F1> :buffers<CR>:buffer<Space>
+
+  nnoremap <F8> :sbnext<CR>
+  nnoremap <S-F8> :sbprevious<CR>
+
+" buffers in wildmenu
+  set wildcharm=<C-Z>
+  nnoremap <F10> :b <C-Z>
+
+
+" gz in command mode closes the current buffer
+  map gz :bdelete<cr>
+" Nasledujúci/Predchádzajúci buf
+  nnoremap <C-Tab> :bn<cr>
+  nnoremap <S-Tab> :bp<cr>
+  map gb :bnext<cr>
+  map gB :bprev<cr>
+
+ " Go to buf by number
+  noremap t1 :b1<CR>
+  noremap t2 :b2<CR>
+  noremap t3 :b3<CR>
+  noremap t4 :b4<CR>
+  noremap t5 :b5<CR>
+  noremap t6 :b6<CR>
+  noremap t7 :b7<CR>
+  noremap t8 :b8<CR>
+  noremap t9 :b9<CR>
+  noremap t0 :tablast<cr>"
+
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+  nnoremap <leader>l :ls<CR>:b<space>
+  nnoremap <leader>b :bp<CR>
+" nnoremap <leader>f :bn<CR>
+  nnoremap <leader>g :e#<CR>
+  nnoremap <leader>1 :1b<CR>
+  nnoremap <leader>2 :2b<CR>
+  nnoremap <leader>3 :3b<CR>
+  nnoremap <leader>4 :4b<CR>
+  nnoremap <leader>5 :5b<CR>
+  nnoremap <leader>6 :6b<CR>
+  nnoremap <leader>7 :7b<CR>
+  nnoremap <leader>8 :8b<CR>
+  nnoremap <leader>9 :9b<CR>
+  nnoremap <leader>0 :10b<CR>
+" }
+" split navigations {
+  nnoremap <C-J> <C-W><C-J>   " move to the split below
+  nnoremap <C-K> <C-W><C-K>   " move to the split above
+  nnoremap <C-L> <C-W><C-L>   " move to the split to the right
+  nnoremap <C-H> <C-W><C-H>   " move to the split to the left
+" }
+" auto indent the whole file {
+  nmap <leader>ai mzgg=G`z
+" }
+" No map for 'recording' in vim {
+  map q <Nop>
+" }
+"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS  {
+
+" " Pencil wrapper {
+" 	augroup pencil
+" 		autocmd!
+"    	autocmd filetype markdown,mkd,mk call pencil#init()
+"        \ | call lexical#init()
+"        \ | call litecorrect#init()
+"        \ | setl spell spl=sk fdl=4 noru nonu nornu
+"        \ | setl fdo+=search
+"   augroup END
+"
+" " Pencil / Writing Controls {
+"   let g:pencil#wrapModeDefault = 'soft'
+"   let g:pencil#textwidth = 74
+"   let g:pencil#joinspaces = 0
+"   let g:pencil#cursorwrap = 1
+"   let g:pencil#conceallevel = 3
+"   let g:pencil#concealcursor = 'c'
+"   let g:pencil#softDetectSample = 20
+"   let g:pencil#softDetectThreshold = 130
+" 	" }
+" }
+" NERDTreeToggle {
+  map <silent> <F3> :NERDTreeToggle<CR>
+  let g:NERDTreeNaturalSort = 1
+  let NERDTreeMinimalUI=1
+  let NERDTreeDirArrows=1
+" let g:NERDTreeShowIgnoredStatus = 1 " (a heavy feature may cost much more time)
+
+" let g:NERDTreeIndicatorMapCustom = {
+        \ "Modified"  : "✹",
+        \ "Staged"    : "✚",
+        \ "Untracked" : "✭",
+        \ "Renamed"   : "➜",
+        \ "Unmerged"  : "═",
+        \ "Deleted"   : "✖",
+        \ "Dirty"     : "✗",
+        \ "Clean"     : "✔︎",
+        \ 'Ignored'   : '☒',
+        \ "Unknown"   : "?"
+        \ }
+" }
+" Commenting blocks of code {
+  autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+  autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+  autocmd FileType conf,fstab       let b:comment_leader = '# '
+  autocmd FileType tex              let b:comment_leader = '% '
+  autocmd FileType mail             let b:comment_leader = '> '
+  autocmd FileType vim              let b:comment_leader = '" '
+  noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+  noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+" vmap <leader>cc :s/^/"/<cr>
+" vmap <leader>cu :s/^"//<cr>
+" }
+" Vysvietenie a pri ukladani vymazanie nadbytocnych znakov {
+  if has('gui_running')
+    hi WhiteSpaceEOL guibg=#FF0000
+  else
+    hi WhiteSpaceEOL ctermbg=Red
+  endif
+  match WhitespaceEOL /\s\+\%#\@<!$/
+
+" Zmazanie nadbytočných znakov pri ukladaní súboru
+" See http://vim.wikia.com/wiki/Remove_unwanted_spaces
+  autocmd BufWritePre * :%s/\s\+$//e
+" }
+"  Umini buffer explorer {
+"     let g:miniBufExplModSelTarget = 1
+"     let g:miniBufExplorerMoreThanOne = 0
+"     let g:miniBufExplModSelTarget = 0
+"     let g:miniBufExplUseSingleClick = 1
+"     let g:miniBufExplMapWindowNavVim = 1
+"     let g:miniBufExplVSplit = 25
+"     let g:miniBufExplSplitBelow=1
+"     map <c-w><c-t> :WMToggle<cr>
+" }
+" vim explorer {
+  map <F4> :!ls<CR>:e
+" }
+" syntastic is a syntax checking plugin {
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+" }
+" toggle a markdown notes file in a fixed window on the right with f11 {
+" nnoremap <F11> :NotesToggle<cr>
+" command! -nargs=0 NotesToggle call <sid>toggleNotes()
+" function! s:toggleNotes() abort
+"   let winnr = bufwinnr("notes.md")
+"   if winnr > 0
+"     exec winnr . "wincmd c"
+"     return
+"   endif
+"
+"   botright 100vs notes.md
+"   setl wfw
+"   setl nonu
+"
+"   "hack to make nerdtree et al not split the window
+"   setl previewwindow
+"
+"   "for some reason this doesnt get run automatically and the cursor
+"   "position doesn't get set
+"   doautocmd bufreadpost %
+"
+"   normal zMzO
+" endfunction
+" }
+"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" INCLUDE CONFIGS FILES {
+" VUNDLE config {
+  if filereadable(expand("~/.vim/vimrc.vundle"))
+    source ~/.vim/vimrc.vundle
+  endif
+" }
+" CALENDAR {
+  if filereadable(expand("~/.vim/vimrc.calend"))
+    source ~/.vim/vimrc.calend
+  endif
+" }
+" VO2MD - convert from VimOutliner to Markdown and back {
+" if filereadable(expand("~/.vim/vimrc.VO2MD"))
+"   source ~/.vim/vimrc.VO2MD
+" endif
+" }
+" airline - settings {
+   if filereadable(expand("~/.vim/vimrc.airline"))
+     source ~/.vim/vimrc.airline
+   endif
+" }
+" statusline {
+"   if filereadable(expand("~/.vim/vimrc.stline"))
+"     source ~/.vim/vimrc.stline
+"   endif
+" }
+" netrwhist {
+  if filereadable(expand("~/.vim/vimrc.netrwhist"))
+    source ~/.vim/vimrc.netrwhist
+  endif
+" }
+" vimtex - settings {
+  if filereadable(expand("~/.vim/vimrc.vimtex"))
+    source ~/.vim/vimrc.vimtex
+  endif
+" }
+" vimwiki - settings {
+  if filereadable(expand("~/.vim/vimrc.vimwiki"))
+    source ~/.vim/vimrc.vimwiki
+  endif
+" }
+" wrtiter: markdown colloring {
+"   if filereadable(expand("~/.vim/vimrc.writer"))
+"     source ~/.vim/vimrc.writer
+"   endif
+" }
+" asciidoc configs {
+  if filereadable(expand("~/.vim/vimrc.asciidoc"))
+    source ~/.vim/vimrc.asciidoc
+  endif
+" }
+" vim-markdown-toc {
+  if filereadable(expand("~/.vim/vimrc.vim-markdown-toc"))
+    source ~/.vim/vimrc.vim-markdown-toc
+  endif
+" }
+" vim-pandoc/vim-markdownfootnotes {
+" if filereadable(expand("~/.vim/vimrc.vim-markdownfootnotes"))
+"   source ~/.vim/vimrc.vim-markdownfootnotes
+" endif
+" }
+"}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EOF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

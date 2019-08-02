@@ -1,0 +1,113 @@
+ " VUNDLE settings """"""""""""""""""""""""""""""""""""""""""""{
+ " vim: set foldmarker={,} foldlevel=0 foldmethod=marker :
+ "            _____
+ " ___   ____(_)______ ___
+ " __ | / /_  /__  __ `__ \
+ " __ |/ /_  / _  / / / / /
+ " _____/ /_/  /_/ /_/ /_/
+ "
+ " Maintainer: ferko
+ " Version: 0.5
+ " Last Change: 2019-07-27 23:18:44 CEST
+ """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}
+
+" Base and required
+    set nocompatible              " be iMproved
+    filetype off                  " required!
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#rc()
+"   call vundle#begin()
+
+" All the Vundle plugins:
+" =======================
+    Plugin 'VundleVim/Vundle.vim'
+
+    Plugin 'gregsexton/VimCalc'
+    Plugin 'mattn/calendar-vim'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'vim-scripts/mail.vim'
+    Plugin 'vim-scripts/rcsvers.vim'
+    Plugin 'vim-scripts/taglist.vim'
+    Plugin 'vim-scripts/update-time'
+    Plugin 'vim-scripts/vim-auto-save'
+    Plugin 'vim-syntastic/syntastic'
+    Plugin 'vimwiki/vimwiki'
+"   Plugin 'vimwiki/vimwiki-footnotes'
+
+    Plugin 'vim-pandoc/vim-pandoc'
+    Plugin 'vim-pandoc/vim-pandoc-syntax'
+    Plugin 'vim-pandoc/vim-markdownfootnotes'
+
+" Markdown
+    Plugin 'mzlogin/vim-markdown-toc'
+    Plugin 'patrickdavey/vimwiki_markdown'
+    Plugin 'shime/vim-livedown'
+
+" AsciiDoc
+    Plugin 'dahu/Asif'
+    Plugin 'dahu/vim-asciidoc'
+    Plugin 'dahu/vimple'
+
+" LaTeX
+    Plugin 'lervag/vimtex'
+"   Plugin 'xuhdev/vim-latex-live-preview'
+
+" Git
+"   Plugin 'airblade/vim-gitgutter'
+"   Plugin 'tpope/vim-fugitive'
+"   Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" GnuPg
+    Plugin 'embear/vim-gnupg'
+
+" Syntax files
+    Plugin 'hrother/offlineimaprc.vim'
+    Plugin 'neomutt/neomutt.vim'
+
+" Themes && Colors
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'lilydjwg/colorizer'
+    Plugin 'morhetz/gruvbox'
+    Plugin 'protesilaos/tempus-themes-vim'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'junegunn/limelight.vim'
+
+" Ostatné
+"   Plugin 'chrisbra/csv.vim'
+"   Plugin 'csexton/trailertrash.vim'
+"   Plugin 'gotbletu/shownotes'
+"   Plugin 'guns/xterm-color-table.vim'
+"   Plugin 'insanum/votl'
+"   Plugin 'itchyny/calendar.vim'
+"   Plugin 'junegunn/goyo.vim'
+"   Plugin 'kien/ctrlp.vim'
+"   Plugin 'nblock/vim-dokuwiki'
+"   Plugin 'pdftotext'
+"   Plugin 'python-mode/python-mode'
+"   Plugin 'reedes/vim-pencil'
+"   Plugin 'tpope/vim-markdown'
+"   Plugin 'tpope/vim-sensible'
+    Plugin 'tpope/vim-unimpaired'
+"   Plugin 'vim-scripts/HTML-AutoCloseTag'
+"   Plugin 'vim-scripts/L9'
+"   Plugin 'vim-scripts/VCard-syntax'
+"   Plugin 'vimoutliner/vimoutliner'
+"   Plugin 'vroom'
+"   Plugin 'xolox/vim-easytags'
+"   Plugin 'xolox/vim-misc'
+"   Plugin 'xolox/vim-notes'
+" Znovuzapnutie filetype
+    filetype plugin on          " Podpora automatického načítavania pluginov pre daný typ súboru
+    filetype indent on          " Podpora automatického načítavania odsadzovacieho skriptu
+
+" Brief help
+"   :PluginList          - list configured bundles
+"   :PluginInstall(!)    - install (update) bundles
+"   :PluginSearch(!) foo - search (or refresh cache first) for foo
+"   :PluginClean(!)      - confirm (or auto-approve) removal of unused bundles
+"
+"   see :h vundle for more details or wiki for FAQ
+"   NOTE: comments after Plugin commands are not allowed.
+
+" EOF
